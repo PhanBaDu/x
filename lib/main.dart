@@ -12,7 +12,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppRouter router = AppRouter();
-
-    return CupertinoApp.router(routerConfig: router.config());
+    return CupertinoApp.router(
+      routerConfig: router.config(),
+      debugShowCheckedModeBanner: false,
+      theme: CupertinoThemeData(
+        textTheme: CupertinoTextThemeData(
+          tabLabelTextStyle: TextStyle(
+            fontSize: 10,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
   }
 }
