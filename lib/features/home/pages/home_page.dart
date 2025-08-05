@@ -65,13 +65,16 @@ class _HomePageState extends State<HomePage> {
         return CupertinoPageScaffold(
           navigationBar: CupertinoNavigationBar(
             backgroundColor: CupertinoColors.systemBackground,
-            leading: CupertinoButton(
-              padding: EdgeInsets.zero,
-              onPressed: () {},
-              child: Icon(
-                FIcons.badgePlus,
-                size: 24,
-                color: CupertinoColors.label,
+            leading: Padding(
+              padding: EdgeInsets.only(left: 8),
+              child: CupertinoButton(
+                padding: EdgeInsets.zero,
+                onPressed: () {},
+                child: Icon(
+                  FIcons.badgePlus,
+                  size: 24,
+                  color: CupertinoColors.label,
+                ),
               ),
             ),
             middle: Text(
@@ -82,13 +85,16 @@ class _HomePageState extends State<HomePage> {
                 color: CupertinoColors.label,
               ),
             ),
-            trailing: CupertinoButton(
-              padding: EdgeInsets.zero,
-              onPressed: () {},
-              child: Icon(
-                FIcons.scanSearch,
-                size: 24,
-                color: CupertinoColors.label,
+            trailing: Padding(
+              padding: EdgeInsets.only(right: 8),
+              child: CupertinoButton(
+                padding: EdgeInsets.zero,
+                onPressed: () {},
+                child: Icon(
+                  FIcons.scanSearch,
+                  size: 24,
+                  color: CupertinoColors.label,
+                ),
               ),
             ),
           ),
