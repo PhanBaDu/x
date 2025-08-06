@@ -114,13 +114,13 @@ class _HomePageState extends State<HomePage> {
               child: Container(
                 padding: EdgeInsets.all(6),
                 decoration: BoxDecoration(
-                  color: CupertinoColors.systemGrey.withOpacity(0.1),
+                  color: CupertinoColors.activeBlue.withOpacity(0.08),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Icon(
                   FIcons.plus,
                   size: 20,
-                  color: CupertinoColors.black,
+                  color: CupertinoColors.activeBlue,
                 ),
               ),
             ),
@@ -140,13 +140,13 @@ class _HomePageState extends State<HomePage> {
               child: Container(
                 padding: EdgeInsets.all(6),
                 decoration: BoxDecoration(
-                  color: CupertinoColors.systemGrey.withOpacity(0.1),
+                  color: CupertinoColors.activeBlue.withOpacity(0.08),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Icon(
                   FIcons.search,
                   size: 20,
-                  color: CupertinoColors.black,
+                  color: CupertinoColors.activeBlue,
                 ),
               ),
             ),
