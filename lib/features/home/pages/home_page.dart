@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:forui_assets/forui_assets.dart';
 import 'package:x/features/friend/pages/friend_page.dart';
 import 'package:x/features/home/pages/home_children_page.dart';
+import 'package:x/features/home/screens/create_post_screen.dart';
 import 'package:x/features/notification/pages/notification_page.dart';
 import 'package:x/features/setting/pages/setting_page.dart';
 
@@ -26,6 +28,43 @@ class _HomePageState extends State<HomePage> {
 
   final List<String> _titles = ['Trang chủ', 'Bạn bè', 'Thông báo', 'Cài đặt'];
 
+  void _navigateToCreatePost(BuildContext context) {
+    // Add haptic feedback for better iOS experience
+    HapticFeedback.lightImpact();
+
+    Navigator.of(context).push(
+      PageRouteBuilder<void>(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            CreatePostScreen(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          // iOS-style slide transition
+          const begin = Offset(1.0, 0.0);
+          const end = Offset.zero;
+          const curve = Curves.ease;
+
+          var tween = Tween(
+            begin: begin,
+            end: end,
+          ).chain(CurveTween(curve: curve));
+
+          return SlideTransition(
+            position: animation.drive(tween),
+            child: child,
+          );
+        },
+        transitionDuration: const Duration(milliseconds: 300),
+      ),
+    );
+  }
+
+  void _handleSearch(BuildContext context) {
+    // Add haptic feedback
+    HapticFeedback.lightImpact();
+
+    // TODO: Navigate to search page
+    print('Search tapped');
+  }
+
   @override
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
@@ -35,7 +74,6 @@ class _HomePageState extends State<HomePage> {
         border: Border(
           top: BorderSide(color: CupertinoColors.separator, width: 0.5),
         ),
-
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
@@ -68,32 +106,48 @@ class _HomePageState extends State<HomePage> {
             border: Border(
               bottom: BorderSide(color: CupertinoColors.separator, width: 0.15),
             ),
-            leading:CupertinoButton(
-                padding: EdgeInsets.zero,
-                minSize: 0,
-                onPressed: () {},
+            leading: CupertinoButton(
+              padding: EdgeInsets.zero,
+              minSize: 0,
+              pressedOpacity: 0.7,
+              onPressed: () => _navigateToCreatePost(context),
+              child: Container(
+                padding: EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                  color: CupertinoColors.systemGrey.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(6),
+                ),
                 child: Icon(
                   FIcons.plus,
-                  size: 24,
-                  color: CupertinoColors.label,
+                  size: 20,
+                  color: CupertinoColors.black,
+                ),
               ),
             ),
             middle: Text(
               _titles[index],
               style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w800,
+                fontSize: 17,
+                fontWeight: FontWeight.w600,
                 color: CupertinoColors.label,
               ),
             ),
             trailing: CupertinoButton(
-                padding: EdgeInsets.zero,
-                minSize: 0,
-                onPressed: () {},
+              padding: EdgeInsets.zero,
+              minSize: 0,
+              pressedOpacity: 0.7,
+              onPressed: () => _handleSearch(context),
+              child: Container(
+                padding: EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                  color: CupertinoColors.systemGrey.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(6),
+                ),
                 child: Icon(
                   FIcons.search,
-                  size: 24,
-                  color: CupertinoColors.label,
+                  size: 20,
+                  color: CupertinoColors.black,
+                ),
               ),
             ),
           ),
