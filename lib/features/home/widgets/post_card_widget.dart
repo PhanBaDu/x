@@ -44,7 +44,7 @@ class PostCardWidget extends StatelessWidget {
                 height: 40,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: CupertinoColors.systemBlue,
+                  color: CupertinoColors.black,
                 ),
                 child: ClipOval(
                   child: Icon(
@@ -73,16 +73,6 @@ class PostCardWidget extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        if (isFollowing) ...[
-                          SizedBox(width: 4),
-                          Text(
-                            '• Theo dõi',
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: CupertinoColors.systemBlue,
-                            ),
-                          ),
-                        ],
                       ],
                     ),
                     SizedBox(height: 2),
@@ -97,7 +87,7 @@ class PostCardWidget extends StatelessWidget {
                         ),
                         SizedBox(width: 4),
                         Icon(
-                          CupertinoIcons.globe,
+                          FIcons.earth,
                           size: 12,
                           color: CupertinoColors.secondaryLabel,
                         ),
@@ -110,16 +100,7 @@ class PostCardWidget extends StatelessWidget {
               Row(
                 children: [
                   CupertinoButton(
-                    padding: EdgeInsets.zero,
-                    onPressed: () {},
-                    child: Icon(
-                      CupertinoIcons.ellipsis,
-                      color: CupertinoColors.secondaryLabel,
-                      size: 20,
-                    ),
-                  ),
-                  SizedBox(width: 8),
-                  CupertinoButton(
+                    minSize: 0,
                     padding: EdgeInsets.zero,
                     onPressed: () {},
                     child: Icon(
@@ -174,8 +155,8 @@ class PostCardWidget extends StatelessWidget {
                     Container(
                       color: CupertinoColors.systemGrey4,
                       child: Icon(
-                        FIcons.image,
-                        size: 50,
+                        FIcons.imageOff,
+                        size: 30,
                         color: CupertinoColors.systemGrey,
                       ),
                     ),
@@ -193,7 +174,7 @@ class PostCardWidget extends StatelessWidget {
                               end: Alignment.bottomCenter,
                               colors: [
                                 CupertinoColors.black.withOpacity(0),
-                                CupertinoColors.black.withOpacity(0.7),
+                                CupertinoColors.black.withOpacity(0.2),
                               ],
                             ),
                           ),
@@ -217,184 +198,104 @@ class PostCardWidget extends StatelessWidget {
 
           // Reactions and stats
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Reactions
-              Row(
-                children: [
-                  // Reaction icons
-                  Stack(
-                    children: [
-                      Container(
-                        width: 20,
-                        height: 20,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: CupertinoColors.systemOrange,
+              // Phần reaction icons + count
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        Icon(
+                          CupertinoIcons.heart_fill,
+                          size: 20,
+                          color: CupertinoColors.systemRed,
                         ),
-                        child: Center(
-                          child: Text('😂', style: TextStyle(fontSize: 12)),
-                        ),
-                      ),
-                      Positioned(
-                        left: 12,
-                        child: Container(
-                          width: 20,
-                          height: 20,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: CupertinoColors.systemBlue,
-                          ),
-                          child: Center(
-                            child: Text('👍', style: TextStyle(fontSize: 12)),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(width: 20),
-                  Text(
-                    reactionsCount,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: CupertinoColors.secondaryLabel,
+                      ],
                     ),
-                  ),
-                ],
+                    SizedBox(width: 4),
+                    Text(
+                      reactionsCount,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: CupertinoColors.secondaryLabel,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              // Comments and shares count
-              Row(
-                children: [
-                  Text(
-                    '$commentsCount bình luận',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: CupertinoColors.secondaryLabel,
+
+              // Phần bình luận
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      '$commentsCount bình luận',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: CupertinoColors.secondaryLabel,
+                      ),
                     ),
-                  ),
-                  SizedBox(width: 16),
-                  Text(
-                    '$sharesCount lượt chia sẻ',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: CupertinoColors.secondaryLabel,
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
-          SizedBox(height: 8),
 
-          // Divider
-          Container(height: 0.5, color: CupertinoColors.separator),
-          SizedBox(height: 8),
-
+          SizedBox(height: 12),
           // Action buttons
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               // Like button
-              Expanded(
-                child: CupertinoButton(
-                  padding: EdgeInsets.symmetric(vertical: 8),
-                  onPressed: () {},
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        CupertinoIcons.hand_thumbsup,
-                        size: 20,
+              CupertinoButton(
+                padding: EdgeInsets.zero, // xóa padding thừa
+                minSize: 0,
+                onPressed: () {},
+                child: Row(
+                  children: [
+                    Icon(
+                      CupertinoIcons.heart,
+                      size: 20,
+                      color: CupertinoColors.secondaryLabel,
+                    ),
+                    SizedBox(width: 6),
+                    Text(
+                      'Thích',
+                      style: TextStyle(
+                        fontSize: 15,
                         color: CupertinoColors.secondaryLabel,
+                        fontWeight: FontWeight.w500,
                       ),
-                      SizedBox(width: 6),
-                      Text(
-                        'Thích',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: CupertinoColors.secondaryLabel,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
+
               // Comment button
-              Expanded(
-                child: CupertinoButton(
-                  padding: EdgeInsets.symmetric(vertical: 8),
-                  onPressed: () {},
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        CupertinoIcons.chat_bubble,
-                        size: 20,
+              CupertinoButton(
+                padding: EdgeInsets.zero,
+                minSize: 0,
+                onPressed: () {},
+                child: Row(
+                  children: [
+                    Icon(
+                      FIcons.messageCircle,
+                      size: 20,
+                      color: CupertinoColors.secondaryLabel,
+                    ),
+                    SizedBox(width: 6),
+                    Text(
+                      'Bình luận',
+                      style: TextStyle(
+                        fontSize: 15,
                         color: CupertinoColors.secondaryLabel,
+                        fontWeight: FontWeight.w500,
                       ),
-                      SizedBox(width: 6),
-                      Text(
-                        'Bình luận',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: CupertinoColors.secondaryLabel,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              // Send button
-              Expanded(
-                child: CupertinoButton(
-                  padding: EdgeInsets.symmetric(vertical: 8),
-                  onPressed: () {},
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        CupertinoIcons.paperplane,
-                        size: 20,
-                        color: CupertinoColors.secondaryLabel,
-                      ),
-                      SizedBox(width: 6),
-                      Text(
-                        'Gửi',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: CupertinoColors.secondaryLabel,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              // Share button
-              Expanded(
-                child: CupertinoButton(
-                  padding: EdgeInsets.symmetric(vertical: 8),
-                  onPressed: () {},
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        CupertinoIcons.share,
-                        size: 20,
-                        color: CupertinoColors.secondaryLabel,
-                      ),
-                      SizedBox(width: 6),
-                      Text(
-                        'Chia sẻ',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: CupertinoColors.secondaryLabel,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ],

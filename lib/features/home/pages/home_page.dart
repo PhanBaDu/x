@@ -31,9 +31,9 @@ class _HomePageState extends State<HomePage> {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
         height: 55,
-        backgroundColor: CupertinoColors.systemBackground,
+        backgroundColor: CupertinoColors.systemBackground.withOpacity(0.7),
         border: Border(
-          top: BorderSide(color: CupertinoColors.separator, width: 0.15),
+          top: BorderSide(color: CupertinoColors.separator, width: 0.5),
         ),
 
         currentIndex: _currentIndex,
@@ -64,17 +64,18 @@ class _HomePageState extends State<HomePage> {
       tabBuilder: (context, index) {
         return CupertinoPageScaffold(
           navigationBar: CupertinoNavigationBar(
-            backgroundColor: CupertinoColors.systemBackground,
-            leading: Padding(
-              padding: EdgeInsets.only(left: 8),
-              child: CupertinoButton(
+            backgroundColor: CupertinoColors.systemBackground.withOpacity(0.7),
+            border: Border(
+              bottom: BorderSide(color: CupertinoColors.separator, width: 0.15),
+            ),
+            leading:CupertinoButton(
                 padding: EdgeInsets.zero,
+                minSize: 0,
                 onPressed: () {},
                 child: Icon(
-                  FIcons.badgePlus,
+                  FIcons.plus,
                   size: 24,
                   color: CupertinoColors.label,
-                ),
               ),
             ),
             middle: Text(
@@ -85,16 +86,14 @@ class _HomePageState extends State<HomePage> {
                 color: CupertinoColors.label,
               ),
             ),
-            trailing: Padding(
-              padding: EdgeInsets.only(right: 8),
-              child: CupertinoButton(
+            trailing: CupertinoButton(
                 padding: EdgeInsets.zero,
+                minSize: 0,
                 onPressed: () {},
                 child: Icon(
-                  FIcons.scanSearch,
+                  FIcons.search,
                   size: 24,
                   color: CupertinoColors.label,
-                ),
               ),
             ),
           ),

@@ -8,8 +8,11 @@ class HomeChildrenPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoScrollbar(
+      thumbVisibility: false,
+      thickness: 0,
+      radius: Radius.zero,
       child: SingleChildScrollView(
-        padding: EdgeInsets.all(0),
+        padding: EdgeInsets.only(top: 88, bottom: 150),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -18,7 +21,28 @@ class HomeChildrenPage extends StatelessWidget {
 
             // Section 2: Separator
             Container(
-              height: 8,
+              height: 4,
+              width: double.infinity,
+              color: CupertinoColors.systemFill,
+            ),
+
+            // Section 3: Post cards
+            PostCardWidget(
+              authorName: 'ALW - Anime',
+              timeAgo: '29 thg 7',
+              content:
+                  'Muichiro nghĩ ngờ nhân sinh! 😂 Muichiro nghĩ ngờ nhân sinh! 😂 Muichiro nghĩ ngờ nhân sinh! 😂 Muichiro nghĩ ngờ nhân sinh! 😂',
+              hashtag: '#otakusic',
+              imageCaption:
+                  'Tanjiro tại sao cậu lại có đôi mắt màu đỏ của gia tộc tổ chứ?',
+              reactionsCount: '57,8K',
+              commentsCount: '3,8K',
+              sharesCount: '256',
+              isFollowing: true,
+            ),
+
+            Container(
+              height: 4,
               width: double.infinity,
               color: CupertinoColors.systemFill,
             ),
@@ -36,10 +60,9 @@ class HomeChildrenPage extends StatelessWidget {
               sharesCount: '256',
               isFollowing: true,
             ),
-
             // Add more posts here
             Container(
-              height: 8,
+              height: 4,
               width: double.infinity,
               color: CupertinoColors.systemFill,
             ),
